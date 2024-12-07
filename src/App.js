@@ -5,6 +5,7 @@ import PaletteGenerator from "./components/PaletteGenerator";
 import PaletteSuggestions from "./components/PaletteSuggestions";
 import Footer from "./components/Footer";
 import './styles.css';
+import RandomPalette from "./components/RandomPalette";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <HeroSection />
       <PaletteGenerator />
+      <RandomPalette/>
       <PaletteSuggestions />
       <Footer />
     </div>

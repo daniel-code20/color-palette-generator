@@ -37,7 +37,7 @@ function PaletteGenerator() {
 
         <label
           htmlFor="upload"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 cursor-pointer hover:bg-blue-600 transition duration-300"
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-4 cursor-pointer hover:bg-blue-600 transition duration-300"
         >
           Subir Imagen
         </label>
@@ -56,7 +56,7 @@ function PaletteGenerator() {
             <img
               src={selectedImage}
               alt="Vista previa"
-              className="w-64 h-auto rounded-lg shadow-md"
+              className="w-64 h-auto rounded shadow-md"
             />
           </div>
         )}
@@ -76,11 +76,11 @@ function PaletteGenerator() {
           ) : (
             // Cuadros con colores predeterminados si no se ha cargado una imagen
             <>
-              <div className="w-16 h-16 bg-red-500 rounded-lg"></div>
-              <div className="w-16 h-16 bg-green-500 rounded-lg"></div>
-              <div className="w-16 h-16 bg-blue-500 rounded-lg"></div>
-              <div className="w-16 h-16 bg-yellow-500 rounded-lg"></div>
-              <div className="w-16 h-16 bg-purple-500 rounded-lg"></div>
+              <div className="w-16 h-16 bg-red-500 rounded"></div>
+              <div className="w-16 h-16 bg-green-500 rounded"></div>
+              <div className="w-16 h-16 bg-blue-500 rounded"></div>
+              <div className="w-16 h-16 bg-yellow-500 rounded"></div>
+              <div className="w-16 h-16 bg-purple-500 rounded"></div>
             </>
           )}
         </div>
