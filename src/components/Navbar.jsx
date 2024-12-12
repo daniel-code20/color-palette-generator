@@ -5,7 +5,7 @@ function Navbar() {
         <div className="text-black text-2xl font-bold">ColorGen</div>
         <ul className="flex space-x-6 text-black">
           <li><a href="/">Inicio</a></li>
-          <li><a href="#generator">Generador</a></li>
+          <li><a href="/palette-generator">Generador</a></li>
           <li><a href="#footer">Contacto</a></li>
         </ul>
       </div>

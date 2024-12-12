@@ -13,7 +13,7 @@ function HeroSection() {
   return (
     <div
       id="hero"
-      className="bg-gradient-to-br from-indigo-600 to-purple-600 text-white px-4 py-16 min-h-screen flex items-center"
+      className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white px-4 py-16 min-h-screen flex items-center"
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
         <div className="md:w-1/2 text-center md:text-left">

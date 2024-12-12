@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 
 function RandomPalette() {
   const [palette, setPalette] = useState([]);
@@ -36,6 +37,8 @@ function RandomPalette() {
   }, []);
 
   return (
+    <>
+    <Navbar />
     <div className="p-8">
       <h1 className="text-3xl font-bold text-center mb-6">Generador de Paletas</h1>
       {loading ? (
@@ -64,6 +67,7 @@ function RandomPalette() {
         </button>
       </div>
     </div>
+    </>
   );
 }
 
