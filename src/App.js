@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import PaletteGenerator from "./components/PaletteGenerator";
 import PaletteSuggestions from "./components/PaletteSuggestions";
 import Footer from "./components/Footer";
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
 
