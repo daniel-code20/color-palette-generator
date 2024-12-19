@@ -229,7 +229,7 @@ function RandomPalette() {
                     {/* Imagen redonda */}
                     <div className="flex justify-center mb-4">
                       <img
-                        src="/image.png"
+                        src="/image-min.png"
                         alt="Ejemplo"
                         className="w-24 h-24 rounded-full shadow-lg object-cover"
                         style={{
