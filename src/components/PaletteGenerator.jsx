@@ -3,7 +3,6 @@ import ColorThief from "colorthief";
 import Lottie from "lottie-react";
 import { toast, ToastContainer } from "react-toastify";
 import animationData from "../animation/Palette.json";
-import "react-toastify/dist/ReactToastify.css";
 
 function PaletteGenerator() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -32,7 +31,7 @@ function PaletteGenerator() {
 
       // Notificación de éxito
       toast("🎉 Imagen cargada con éxito", {
-        position: "top-center",
+        position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -46,7 +45,7 @@ function PaletteGenerator() {
     } else if (file) {
       // Notificación de error
       toast("⚠️ Solo se permiten archivos de imagen", {
-        position: "top-center",
+        position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -81,7 +80,7 @@ function PaletteGenerator() {
 
     img.onerror = () => {
       toast("⚠️ Error al cargar la imagen. Por favor, intenta con otra.", {
-        position: "top-center",
+        position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -108,7 +107,7 @@ function PaletteGenerator() {
   const handleCopyColor = (color) => {
     navigator.clipboard.writeText(color).then(() => {
       toast("🚀 Color copiado", {
-        position: "top-center",
+        position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -144,96 +143,98 @@ function PaletteGenerator() {
 
   return (
     <section
-  id="palette-generator"
-  className="min-h-screen flex items-center justify-center bg-gradient-to-tl from-gray-50 to-gray-100 p-10"
->
-  <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-    {/* Columna Izquierda */}
-    <div className="space-y-6">
-      <Lottie
-        animationData={animationData}
-        loop={true}
-        className="w-64 md:w-80 mx-auto lg:mx-0"
-      />
-      <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-800 text-center lg:text-left leading-tight">
-        Genera paletas de colores hermosas al instante
-      </h2>
-      <p className="text-lg lg:text-xl text-gray-600 text-center lg:text-left">
-        Sube una imagen para analizar sus colores y obtener una paleta en
-        segundos. Perfecto para diseñadores y creativos.
-      </p>
-    </div>
-
-    {/* Columna Derecha */}
-    <div
-      className={`flex flex-col items-center justify-center space-y-6 border-2 rounded-3xl p-8 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 ${
-        isDragging
-          ? "border-blue-500 bg-blue-100"
-          : "border-gray-300 border-dashed"
-      }`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
+      id="palette-generator"
+      className="bg-slate-50 min-h-screen flex items-center justify-center p-10"
     >
-      {!selectedImage ? (
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="text-7xl text-blue-500">📁</div>
-          <p className="text-gray-600 text-lg text-center">
-            Arrastra tu imagen aquí o selecciona una desde tu dispositivo.
-          </p>
-          <label
-            htmlFor="upload"
-            className="cursor-pointer py-3 px-6 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition duration-200"
-          >
-            Subir Imagen
-            <input
-              id="upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
-          </label>
-        </div>
-      ) : (
-        <div className="relative">
-          <img
-            src={selectedImage}
-            alt="Vista previa"
-            className="w-80 h-auto rounded-lg shadow-md border border-gray-200"
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        {/* Columna Izquierda */}
+        <div className="space-y-6">
+          <Lottie
+            animationData={animationData}
+            loop={true}
+            className="w-64 md:w-80 mx-auto lg:mx-0"
           />
-          <button
-            onClick={resetImage}
-            className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700"
-          >
-            ✕
-          </button>
-        </div>
-      )}
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-blue-950 text-center lg:text-left leading-tight">
+            Extrae la paleta de colores de una imagen al{" "}
+            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-pink-500 ">
+              Instante
+            </span>
+          </h2>
 
-      {/* Paleta */}
-      {palette.length > 0 && (
-        <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
-          {palette.map((color, idx) => (
-            <div
-              key={idx}
-              className="relative w-16 h-16 rounded-lg shadow-md group cursor-pointer transform hover:scale-110 transition duration-300"
-              style={{ backgroundColor: color }}
-              onClick={() => handleCopyColor(color)}
-            >
-              <span className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {color}
-              </span>
+          <p className="text-lg lg:text-xl text-blue-950 text-center lg:text-left">
+            Sube una imagen para analizar sus colores y obtener una paleta en
+            segundos. Perfecto para diseñadores y creativos.
+          </p>
+        </div>
+
+        {/* Columna Derecha */}
+        <div
+          className={`flex flex-col items-center justify-center space-y-6 border-2 rounded-3xl p-8 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 ${
+            isDragging
+              ? "border-blue-500 bg-blue-100"
+              : "border-gray-300 border-dashed"
+          }`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          {!selectedImage ? (
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="text-7xl text-blue-500">📁</div>
+              <p className="text-gray-600 text-lg text-center">
+                Arrastra tu imagen aquí o selecciona una desde tu dispositivo.
+              </p>
+              <label
+                htmlFor="upload"
+                className="cursor-pointer py-3 px-6 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200"
+              >
+                Subir Imagen
+                <input
+                  id="upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </label>
             </div>
-          ))}
+          ) : (
+            <div className="relative">
+              <img
+                src={selectedImage}
+                alt="Vista previa"
+                className="w-80 h-auto rounded-lg shadow-md border border-gray-200"
+              />
+              <button
+                onClick={resetImage}
+                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+
+          {/* Paleta */}
+          {palette.length > 0 && (
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
+              {palette.map((color, idx) => (
+                <div
+                  key={idx}
+                  className="relative w-16 h-16 rounded-lg shadow-md group cursor-pointer transform hover:scale-110 rounded-lg transition duration-300"
+                  style={{ backgroundColor: color }}
+                  onClick={() => handleCopyColor(color)}
+                >
+                  <span className="absolute inset-0 flex items-center justify-center bg-opacity-50 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {color}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  </div>
-  <ToastContainer />
-</section>
-
-
+      </div>
+      <ToastContainer />
+    </section>
   );
 }
 

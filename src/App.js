@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import PaletteGenerator from "./components/PaletteGenerator";
-import PaletteSuggestions from "./components/PaletteSuggestions";
+import AboutSection from "./components/AboutSection";
 import Footer from "./components/Footer";
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <HeroSection />
       <PaletteGenerator />
-      <PaletteSuggestions />
+      <AboutSection />
       <Footer />
     </div>
   );
