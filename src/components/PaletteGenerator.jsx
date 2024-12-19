@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ColorThief from "colorthief";
 import Lottie from "lottie-react";
 import { toast, ToastContainer } from "react-toastify";
+import { MdClose } from "react-icons/md";
 import animationData from "../animation/Palette.json";
 
 function PaletteGenerator() {
@@ -144,7 +145,7 @@ function PaletteGenerator() {
   return (
     <section
       id="palette-generator"
-      className="bg-slate-50 min-h-screen flex items-center justify-center p-10"
+      className="bg-slate-50 min-h-screen flex items-center justify-center p-10 "
     >
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Columna Izquierda */}
@@ -207,9 +208,10 @@ function PaletteGenerator() {
               />
               <button
                 onClick={resetImage}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700"
+                className="absolute top-2 right-2 bg-white text-black rounded-full p-2 shadow-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                aria-label="Cerrar"
               >
-                ✕
+                <MdClose size={24} />
               </button>
             </div>
           )}

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { toast, ToastContainer } from "react-toastify";
-import { FaArrowCircleRight, FaSave } from "react-icons/fa";
+import {  FaSave } from "react-icons/fa";
+import { VscDebugRestart } from "react-icons/vsc";
 
 function RandomPalette() {
   const [palette, setPalette] = useState([]);
@@ -12,7 +13,7 @@ function RandomPalette() {
   const fetchRandomPalette = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/palette", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,14 +35,47 @@ function RandomPalette() {
   };
 
   // Función para guardar la paleta actual
-  // Función para guardar la paleta actual
   const saveCurrentPalette = () => {
     if (palette.length > 0) {
       const newPalette = {
         name: `Paleta ${savedPalettes.length + 1}`,
         colors: palette, // Guardar el arreglo completo de colores
       };
-      setSavedPalettes([...savedPalettes, newPalette]);
+
+      // Verificar si la paleta ya está guardada
+      const isDuplicate = savedPalettes.some(
+        (savedPalette) =>
+          JSON.stringify(savedPalette.colors) === JSON.stringify(newPalette.colors)
+      );
+
+      if (isDuplicate) {
+        toast.warn("¡Esta paleta ya fue guardada!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          closeButton: false,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+          className:
+            "rounded-md p-4 text-center bg-red-500 text-white font-bold",
+        });
+      } else {
+        setSavedPalettes([...savedPalettes, newPalette]);
+        toast("⭐ Paleta guardada correctamente", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          closeButton: false,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+          className:
+          "rounded-md p-4 text-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white font-bold",
+        });
+      }
     }
   };
 
@@ -86,11 +120,11 @@ function RandomPalette() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 p-40 flex justify-center items-center animate__animated animate__fadeIn">
+      <div className="min-h-screen bg-gray-50 py-40 sm:p-40 md:p-40 flex justify-center items-center animate__animated animate__fadeIn">
         <div className="w-full max-w-7xl">
           {/* Título principal */}
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-extrabold text-blue-950 tracking-wide">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-950 tracking-wide">
               Generador de Paletas
             </h1>
             <p className="text-blue-950 mt-2">
@@ -128,7 +162,7 @@ function RandomPalette() {
                           stroke-width="5"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          className="text-gray-900"
+                          class="text-gray-900"
                         ></path>
                       </svg>
                     </div>
@@ -163,19 +197,19 @@ function RandomPalette() {
                       )}
 
                       {/* Contenedor de íconos */}
-                      <div className="flex flex-row justify-center gap-6">
+                      <div className="flex flex-row justify-center gap-6 mt-4 sm:mt-10">
                         {/* Icono de Generar Nueva Paleta */}
                         <div
                           onClick={fetchRandomPalette}
-                          className="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-transform hover:scale-105"
+                          className="bg-gradient-to-r from-pink-500 to-violet-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-transform hover:scale-105"
                         >
-                          <FaArrowCircleRight size={30} />
+                          <VscDebugRestart size={30} />
                         </div>
 
                         {/* Icono de Guardar Paleta */}
                         <div
                           onClick={saveCurrentPalette}
-                          className="bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-transform hover:scale-105"
+                          className="bg-white text-blue-950 w-14 h-14 rounded-full flex items-center justify-center shadow-xl cursor-pointer transition-transform hover:scale-105"
                         >
                           <FaSave size={30} />
                         </div>
@@ -215,7 +249,7 @@ function RandomPalette() {
                     </h2>
 
                     {/* Descripción */}
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 mb-4 text-sm sm:text-base">
                       Explora cómo aplicar los colores generados en un diseño
                       moderno.
                     </p>
@@ -242,32 +276,39 @@ function RandomPalette() {
               Paletas Guardadas
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {savedPalettes.map((savedPalette, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col justify-center items-center rounded-lg shadow-lg p-4 bg-white transition-transform hover:scale-105 cursor-pointer"
-                  onClick={() => applySavedPalette(savedPalette.colors)}
-                >
-                  <div className="flex w-full h-24 rounded-lg mb-4">
-                    {savedPalette.colors.map((color, colorIndex) => (
-                      <div
-                        key={colorIndex}
-                        className="flex-1"
-                        style={{
-                          backgroundColor: `rgb(${color.join(",")})`,
-                        }}
-                      />
-                    ))}
+              {savedPalettes.length === 0 ? (
+                <p className="col-span-full text-center text-gray-600">
+                  No se han guardado todavía.
+                </p>
+              ) : (
+                savedPalettes.map((savedPalette, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col justify-center items-center rounded-lg shadow-lg p-4 bg-white transition-transform hover:scale-105 cursor-pointer"
+                    onClick={() => applySavedPalette(savedPalette.colors)}
+                  >
+                    <div className="flex w-full h-24 rounded-lg mb-4">
+                      {savedPalette.colors.map((color, colorIndex) => (
+                        <div
+                          key={colorIndex}
+                          className="flex-1"
+                          style={{
+                            backgroundColor: `rgb(${color.join(",")})`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p className="font-semibold text-lg text-gray-800 mb-2">
+                      {savedPalette.name}
+                    </p>
                   </div>
-                  <p className="font-semibold text-lg text-gray-800 mb-2">
-                    {savedPalette.name}
-                  </p>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

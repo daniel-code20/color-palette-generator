@@ -1,95 +1,48 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
 function PaletteSuggestions() {
-  const [palettes, setPalettes] = useState([]); // Estado para guardar las paletas
-  const [loading, setLoading] = useState(false);
-
-  // Función para obtener las paletas desde la API
-  const fetchPalettes = async () => {
-    setLoading(true);
-    try {
-
-      const response = await fetch("http://localhost:5000/api/palette", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ model: "default" }),
-      });
-      
-
-      if (!response.ok) {
-        throw new Error("Error al obtener las paletas de colores");
-      }
-
-      const jsonResponse = await response.json();
-      console.log("Respuesta de la API:", jsonResponse); // Verificamos la respuesta
-
-      // Aseguramos que la respuesta contiene un 'result' con un array de colores
-      if (jsonResponse.result && Array.isArray(jsonResponse.result)) {
-        setPalettes(jsonResponse.result);
-        console.log("Palettes después de setPalettes:", jsonResponse.result); // Verificamos los datos
-      } else {
-        console.error("La respuesta no contiene 'result' o no es un array.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Llamar a la API cuando el componente se monta
-  useEffect(() => {
-    fetchPalettes();
-  }, []);
-
-  console.log("Palettes:", palettes); // Verificar el contenido de las paletas
-
   return (
-    <section id="suggestions" className="p-10 bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-6">
-        Sugerencias de Paletas
+    <section className="px-6 py-48 bg-gray-100 flex items-center justify-center p-10">
+  {/* Contenedor principal que cambia la dirección de flex */}
+  <div className="flex flex-col md:flex-row items-center justify-center w-full">
+    
+    {/* Imagen del mockup */}
+    <div className="w-full flex justify-center mb-8 md:mb-0 md:w-1/2">
+      <img
+        src="/mockup6.png"
+        alt="Mockup de la herramienta de paletas de colores"
+        className="w-full max-w-2xl rounded-lg h-auto object-contain"
+      />
+    </div>
+
+    {/* Contenido del texto */}
+    <div className="w-full text-center md:text-left flex flex-col items-center md:items-start md:w-1/2">
+      <h2 className="text-4xl lg:text-5xl font-extrabold text-blue-950 leading-tight">
+        Generador de Paletas de{" "}
+        <br />
+        <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
+          Colores
+        </span>
       </h2>
 
-      {/* Mostrar el loader mientras se obtienen los datos */}
-      {loading ? (
-        <p className="text-center">Cargando...</p>
-      ) : (
-        <div className="space-y-16">
-          {palettes.length === 0 ? (
-            <p className="text-center">No se encontraron paletas.</p>
-          ) : (
-            palettes.map((palette, index) => (
-              <div key={index}>
-                <h3 className="text-2xl font-semibold text-center mb-6">
-                  {`Paleta ${index + 1}`}
-                </h3>
+      <p className="text-lg lg:text-xl text-blue-950 mt-4 max-w-xl mx-auto lg:mx-0">
+        Descubre combinaciones de colores únicas y visualízalas aplicadas a
+        una interfaz simulada. Nuestra herramienta te ayuda a encontrar la
+        inspiración que necesitas para tus proyectos creativos. Experimenta
+        con diferentes estilos y encuentra la paleta ideal para tus diseños.
+      </p>
 
-                <div className="grid grid-cols-4 gap-6">
-                  {/* Verificar que el array de colores esté definido */}
-                  {palette.map((color, idx) => {
-                    console.log(`Color ${idx + 1}:`, color); // Verificando los colores en la consola
-                    const hexColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`; // Convertir en formato rgb
-                    return (
-                      <div
-                        key={idx}
-                        className="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 relative group cursor-pointer transition-transform duration-300 transform hover:scale-110 border-2 border-gray-300"
-                        style={{ backgroundColor: hexColor }}
-                      >
-                        <span className="absolute inset-0 flex items-center justify-center text-white text-sm font-semibold bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {hexColor}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-    </section>
+      <button
+        className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white mt-4 px-6 py-2 font-medium rounded-full shadow-xl hover:bg-gradient-to-r hover:from-violet-700 hover:to-indigo-700 transition-transform duration-200 transform hover:scale-105"
+        onClick={() => (window.location.href = "/palette-generator")}
+      >
+        Ir al Generador
+      </button>
+    </div>
+  </div>
+</section>
+
+
   );
 }
 

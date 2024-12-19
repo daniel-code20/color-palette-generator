@@ -32,7 +32,7 @@ function HeroSection() {
         {/* Botón */}
         <button
           onClick={handleScroll}
-          className="bg-gradient-to-r from-pink-500 to-violet-500 text-white px-8 py-4 font-medium rounded-full shadow-xl hover:bg-gradient-to-r hover:from-pink-600 hover:to-violet-600 transition-transform duration-200 transform hover:scale-105"
+          className="bg-gradient-to-r from-pink-500 to-violet-500 text-white px-6 py-2 font-medium rounded-full shadow-xl hover:bg-gradient-to-r hover:from-pink-600 hover:to-violet-600 transition-transform duration-200 transform hover:scale-105"
         >
           Empezar
         </button>
