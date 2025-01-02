@@ -15,7 +15,9 @@ function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="bg-white px-4 py-4 fixed top-4 left-0 right-0 z-10 shadow-lg rounded-full transition-all duration-300 ease-in-out w-full max-w-6xl mx-auto">
+    <nav className="bg-white px-4 py-4 fixed top-4 left-4 right-4 z-10 shadow-lg rounded-lg transition-all duration-300 ease-in-out max-w-6xl mx-auto">
+
+
       <div className="flex items-center justify-between">
         {/* Contenedor logo */}
         <div className="flex items-center text-2xl font-bold">
